@@ -6,13 +6,12 @@ import Dashboard
 import DevotionalGen
 import DiscipleshipCoach
 import Members
-import Technical_Indicators
 import login  # Import the login module
 import chat
 
 # Set page configuration once at the top of the main script
 st.set_page_config(
-    page_title="SMART FORESIGHT",
+    page_title="SHEPHERD OS",
     layout="wide"
 )
 
@@ -37,12 +36,12 @@ class MultiApp:
         with st.sidebar:
             if st.button("Logout"):
                 st.session_state.logged_in = False
-                st.experimental_rerun()  # Reload to show login page
+                st.rerun()  # Reload to show login page
 
             selected_page = option_menu(
-                menu_title="Smart Foresight",
-                options=['Home', 'News', 'Comparison', 'Risk', 'Finances', 'Technical Indicators', 'Prediction', 'Chat'],
-                icons=['house-fill', 'newspaper', 'pie-chart', "shield-shaded", "currency-exchange", "card-checklist", 'graph-up-arrow', 'chat-dots'],
+                menu_title="SHEPHERD OS",
+                options=['Dashboard', 'Attendance', 'Discipleship Coach', 'Devotional Generator', 'Members', 'Chat'],
+                icons=['house-fill', 'person-check-fill', 'people-fill', 'lightbulb-fill', 'person-lines-fill', 'chat-dots'],
                 menu_icon='menu-button-wide',
                 default_index=0,
                 styles={
@@ -54,20 +53,16 @@ class MultiApp:
             )
 
         # Display the selected page's content
-        if selected_page == 'Home':
-            Home.main()
-        elif selected_page == 'News':
-            News.main()
-        elif selected_page == 'Comparison':
-            Comparison.main()
-        elif selected_page == 'Prediction':
-            Prediction.main()
-        elif selected_page == 'Risk':
-            Risk.main()
-        elif selected_page == 'Finances':
-            Finances.main()
-        elif selected_page == 'Technical Indicators':
-            Technical_Indicators.main()
+        if selected_page == 'Dashboard':
+            Dashboard.main()
+        elif selected_page == 'Attendance':
+            Attendance.main()
+        elif selected_page == 'Discipleship Coach':
+            DiscipleshipCoach.main()
+        elif selected_page == 'Devotional Generator':
+            DevotionalGen.main()
+        elif selected_page == 'Members':
+            Members.main()
         elif selected_page == 'Chat':
             chat.main()
 

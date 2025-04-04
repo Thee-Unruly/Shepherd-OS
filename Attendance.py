@@ -3,22 +3,33 @@ from datetime import datetime
 import pandas as pd
 from utils import load_data, save_data
 
-st.title("🕊️ Attendance Tracker")
+def main():
+    st.title("🕊️ Attendance Tracker")
 
-members = load_data("members.csv")
-attendance = load_data("attendance.csv")
+    # Load members and attendance data
+    members = load_data("members.csv")
+    attendance = load_data("attendance.csv")
 
-today = datetime.today().strftime("%Y-%m-%d")
-selected = st.multiselect("Select attendees for today", members["Name"].tolist())
+    today = datetime.today().strftime("%Y-%m-%d")
+    
+    # Option to log attendance
+    st.subheader("Log Your Attendance")
 
-if st.button("Save Attendance"):
-    for name in selected:
-        attendance = pd.concat([
-            attendance,
+    # Let the user choose their name
+    name = st.selectbox("Select Your Name", members["Name"].tolist())
+
+    if st.button("Mark Attendance"):
+        # Mark attendance for today
+        attendance = pd.concat([ 
+            attendance, 
             pd.DataFrame([[name, today]], columns=["Name", "Date"])
         ], ignore_index=True)
-    save_data(attendance, "attendance.csv")
-    st.success("✅ Attendance saved")
+        save_data(attendance, "attendance.csv")
+        st.success("✅ Attendance marked for today")
 
-st.subheader("📅 Attendance Records")
-st.dataframe(attendance)
+    st.subheader("📅 Attendance Records")
+    # Display attendance records
+    st.dataframe(attendance)
+
+if __name__ == "__main__":
+    main()

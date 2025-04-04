@@ -7,7 +7,7 @@ import random
 def load_bible():
     return pd.read_csv("D:/Shepherd OS/hf_datasets/bible.csv")
 
-def app():
+def main():
     df = load_bible()
 
     st.header("📜 AI-Powered Devotional Generator")
@@ -48,3 +48,7 @@ Write in a warm, uplifting, and gentle tone.
             except Exception as e:
                 st.error("Is Ollama running? Failed to generate response.")
                 st.exception(e)
+
+# Ensure the app runs when this module is executed directly
+if __name__ == "__main__":
+    main()
